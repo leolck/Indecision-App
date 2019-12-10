@@ -17,20 +17,22 @@ module.exports = (env) => {
                 exclude: /node_modules/
             }, {
                 test: /\.s?css$/,
-                use: [
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true
+                use: CSSExtract.extract({
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
                         }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }
-                ]
+                    ]
+                })
             }]
         },
         devtool: isProduction ? 'source-map' : 'inline-source-map',
